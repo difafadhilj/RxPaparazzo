@@ -54,11 +54,16 @@ public class PermissionUtil {
     }
 
     public static String[] getReadAndWriteStoragePermissions(boolean internal) {
+        if (Build.VERSION.SDK_INT >= 33) {
+            return new String[] { "android.permission.READ_MEDIA_IMAGES" };
+        }
+
         if (internal) {
             return new String[] { Manifest.permission.READ_EXTERNAL_STORAGE };
         } else {
             return new String[] {
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
             };
         }
     }
